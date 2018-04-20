@@ -38,14 +38,26 @@ def GradientBoostingClassifierModel(X_train, X_test, y_train, y_test):
 
   print('GradientBoostingClassifier -- Score test: {}'.format(model.score(X_test, y_test)))
 
+def GridSearchExemple():
+  svcParameters = [{'kernel': ['rbf'], 'gamma': [1e-3, 1e-4],
+               'C': [1, 10, 100, 1000]},
+              {'kernel': ['linear'], 'C': [1, 10, 100]}]
+
+  LRParameters = {'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000] }
+
+  SVCTune = GridSearchCV(estimator=LogisticRegression(), param_grid=LRParameters, scoring='accuracy', cv=8 )
+  SVCTune.fit( X_train, y_train )
+  print( SVCTune.best_score_ )
+  print( SVCTune.best_params_ )
+
 # On utilise le meilleur modèle (ici la LogisticRegression) pour générer le fichier de validation Kaggle
 def predict(X_train, y_train, test):
   model = LogisticRegression()
-  model.fit(X_train, _train)
+  model.fit(X_train, y_train)
 
   print('LogisticRegression -- Score test: {}'.format(model.score(X_test, y_test)))
 
-  test['Survived'] = model.predict(test.drop(columns=['PassengerId', 'Name', 'SibSp', 'Parch', 'Ticket', 'Fare', 'Cabin', 'Name', 'Sex', 'Ticket', 'TicketLetter']))
+  test['Survived'] = model.predict(test.drop(columns=['PassengerId']))
   test[['PassengerId', 'Survived']].to_csv('predictions/predictions.csv', index=False)
 
 # On filtre la taille de la famille en fonction du nombre de personnes dans la famille
@@ -142,12 +154,14 @@ for df in [train, test]:
 for df in [train, test]:
     df['TicketCategory'] = df['TicketLetter'].apply(filter_ticket)
 
+test["Fare"].fillna(test["Fare"].median(), inplace=True)
+
 train = pd.get_dummies(train, columns=['TicketCategory'])
 test = pd.get_dummies(test, columns=['TicketCategory'])
 
 # Nous supprimons les données non utiles
-formatted_X = train.drop(columns=['PassengerId', 'Survived', 'Name', 'SibSp', 'Parch', 'Ticket', 'Fare', 'Cabin', 'Name', 'Sex', 'Ticket', 'TicketLetter'])
-formatted_test = test.drop(columns=['PassengerId', 'Name', 'SibSp', 'Parch', 'Ticket', 'Fare', 'Cabin', 'Name', 'Sex', 'Ticket', 'TicketLetter'])
+formatted_X = train.drop(columns=['PassengerId', 'Survived', 'Name', 'SibSp', 'Parch', 'Ticket', 'Fare', 'Cabin', 'Sex', 'Ticket', 'TicketLetter'])
+formatted_test = test.drop(columns=['Name', 'SibSp', 'Parch', 'Ticket', 'Fare', 'Cabin', 'Sex', 'Ticket', 'TicketLetter'])
 
 y = train['Survived']
 X = formatted_X
