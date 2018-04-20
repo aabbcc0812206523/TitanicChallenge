@@ -37,3 +37,22 @@ Dans une nouvelle branche du repo actuel (1 branche par groupe)
 - qualité du compte-rendu
 - capacité à aller chercher des informations (sur le net, sur le forum de Kaggle...etc)
 - performances au challenge
+
+
+### Compte rendu Exercice
+On a d'abord essayé de rajouter de la donnée avec les données "Pclass" et "Embarked"
+Vu que les gens ayant acheté des tickets + cher étaient donc mieux logé sur le bateau
+
+On a ensuite nettoyé les données :
+- On a donc enlevé les champs "PassengerId", "Name", "Ticket" et "Cabin" que nous jugions pas pertinent
+
+On a nettoyé les données nulles du dataset.
+Pour les ages on les a complété par des âges fixé arbitrairement en fonction du Pclass.
+Plus les personnes sont mieux logés plus ils sont probablement âgé.
+
+On a aussi rajouté les données d'embarquement à notre prediction.
+
+Puis on a fait plusieurs test avec différents model.
+On a remplacé le model lineaire par un arbre de decision avec un max_depth de 3.
+Ce qui a augmenté notre score.
+
