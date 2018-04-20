@@ -21,7 +21,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
 # entrainement d'une régression linéaire
 model = LogisticRegression()
 model.fit(X_train, y_train)
-model.score(X_test, y_test)
 
 # predictions
 test['Survived'] = model.predict(test[['Age', 'Sex']])
