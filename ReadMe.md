@@ -30,8 +30,7 @@ Chaque groupe clone le repo et apporte au script les modifications qu'il souhait
 - les prédictions qui ont été envoyées à la plateforme (dans le dossier predictions/)
 - un compte rendu détaillant ce qui a été fait et citant les ressources utilisées (à la place du ReadMe.md)
 
-? dans une nouvelle branche du repo suivant: https://github.com/ecvdbdx/TitanicChallenge  
-(1 branche par groupe)
+Dans une nouvelle branche du repo actuel (1 branche par groupe)
 
 ### Critères de notation
 - qualité de la démarche (cohérence des choix qui ont été faits)
