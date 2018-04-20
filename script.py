@@ -26,3 +26,5 @@ model.score(X_test, y_test)
 # predictions
 test['Survived'] = model.predict(test[['Age', 'Sex']])
 test[['PassengerId', 'Survived']].to_csv('predictions/predictions.csv', index=False)
+
+print(model.score(X_test, y_test))
