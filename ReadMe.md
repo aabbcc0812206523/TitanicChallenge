@@ -45,3 +45,9 @@ Dans une nouvelle branche du repo actuel (1 branche par groupe)
 Compréhension des données en utilisant le [Data Dictionary](https://www.kaggle.com/c/titanic/data). On a essayé de définir les features qui pouvaient sembler utile, puis on a sorti les valeurs inutiles. Soit parce qu'il y avait trop de données manquantes, soit parce que les données ne sembalient pas avoir un grand intérêt dans la prédiction.
 
 ### Agrégation des données
+Nous avons commencé par traiter les données faciles à traiter, c'est à dire les features "Pclass" et "Embarked" qui ont juste besoin d'être transformé en dummies, pour le "Embarked" on a juste du remplacer les valeurs nulles par la valeur la plus fréquente qui est "S".
+
+### Choix du modèle
+Pour le choix du modèle utilisé, nous avons crée une fonction pour chaque modèle différent en passant les paramètres qu'on souhaite "fit". Dans chaque modèle on affiche le score afin de voir quel modèle est les plus efficace. Dans un premier temps nous avons testé les modèles LogisticRegression, RandomForestClassifier et SVC après avoir analysé les modèles les plus performants sur plusieurs posts Kaggle (RandomForestClassifier)[https://www.kaggle.com/zhenqiliu/titanic-survival-python-solution], (SVC)[https://www.kaggle.com/battuzz94/a-guide-to-titanic-challenge?scriptVersionId=1059478]
+
+Nous avons remarqué que sans ajouter de features (donc seulement Sex et Age), le modèle Regression Logistique restait le plus efficace. C'est en ajoutant des features qu'on a commencé à voir des améliorations avec le modèle SVC (0,81 vs 0,79).

@@ -24,6 +24,12 @@ def SVCModel(X_train, X_test, y_train, y_test):
 
   print('SVC -- Score test: {}'.format(model.score(X_test, y_test)))
 
+def predict(X_train, y_train, test):
+  model = SVC()
+  model.fit(X_train, y_train)
+
+  test['Survived'] = model.predict(test.drop(columns=['PassengerId', 'Name', 'SibSp', 'Parch', 'Ticket', 'Fare', 'Cabin']))
+  test[['PassengerId', 'Survived']].to_csv('predictions/predictions.csv', index=False)
 
 # Helper functions
 def filter_family_size(x):
@@ -69,7 +75,6 @@ train = pd.get_dummies(train, columns=['Embarked'])
 test = pd.get_dummies(test, columns=['Embarked'])
 
 y = train['Survived']
-# X = train[['Age', 'Sex']]
 X = train.drop(columns=['PassengerId', 'Survived', 'Name', 'SibSp', 'Parch', 'Ticket', 'Fare', 'Cabin'])
 
 # séparation en datasets de train et de test
@@ -79,3 +84,5 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
 LogisticRegressionModel(X_train, X_test, y_train, y_test)
 RandomForestClassifierModel(X_train, X_test, y_train, y_test)
 SVCModel(X_train, X_test, y_train, y_test)
+
+# predict(X_train, y_train, test)
