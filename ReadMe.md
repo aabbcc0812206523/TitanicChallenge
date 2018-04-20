@@ -1,39 +1,26 @@
-# Titanic Challenge
-20 Avril 2018
+#TITANIC CHALLENGE
 
-### Principe
-Il s'agit d'un challenge de Machine Learning (classification binaire) dans lequel le but est de prédire si un passager du Titanic a survécu ou non au naufrage à partir de caractéristiques comme son âge ou son sexe.  
-La métrique permettant de mesurer la qualité du modèle est la précision (= pourcentage de bonnes prédictions).  
+Profil sur Kaggle : rthoreau2
 
-Le challenge, les données ainsi qu'un descriptif détaillé sont disponibles sur la plateforme Kaggle:  
-https://www.kaggle.com/c/titanic
-	
-### Durée
-3h (de 16h à 19h)
+##Approche
+Le but du Titanic Challenge est de prédire la survie ou non des différents passagers.
+De ce fait nous avons déjà un indice sur la direction qu’il faut prendre, le fait qu’il y ait seulement deux issues possibles (0-1) nous dirige vers un modèle de classification.
 
-### Objectif
-Vérifier votre capacité à:
-- mettre en place un algorithme de Machine Learning le plus performant possible
-- faire face à des problématiques data concrètes (nettoyage et traitement de la donnée, gestion des valeurs manquantes, feature engineering...etc)
+##Etapes
+Dans un premier temps, nous avons analysé les différentes données afin de prioriser certaines informations.
+Les premières valeurs qui semblent être importantes sont l’âge et le sexe.
+Or nous remarquons que la colonne « Age » comporte des valeurs manquantes, deux choix étaient donc possible : Supprimer la ligne (au prix d’une donnée), ou affecter une valeur en fonction des autres lignes.
+Notre choix s’est porté sur l’affectation de valeur en utilisant la moyenne d’âge des personnes.
 
-### Déroulé
-Un script de départ vous est remis en début de séance.
-- il met en place un algorithme simple (régression linéaire)
-- seules 2 features sont exploitées (âge et sexe)  
+Par la suite nous avons souhaité ajouter des colonnes au dataset, les colonnes qui nous semblaient pertinentes étant Pclass (La classe où se situait la personne (1,2,3)), SibSp (frère et soeurs, et époux) et Parch (lien de parenté).
 
-Charge à vous d'ajouter des features et d'utiliser des modèles plus complexes afin d'obtenir un meilleur score.
-Vous pouvez pour cela utiliser toutes les ressources à votre disposition (internet, forum Kaggle...etc).  
-Chaque groupe clone le repo et apporte au script les modifications qu'il souhaite.  
-	
-### Attendus
-- le code (commenté)
-- les prédictions qui ont été envoyées à la plateforme (dans le dossier predictions/)
-- un compte rendu détaillant ce qui a été fait et citant les ressources utilisées (à la place du ReadMe.md)
+Après plusieurs modification de paramètres, nous nous sommes aperçu que le modèle Linéaire n’est pas optimal pour ce cas précis ( Score local : 0.78, Kaggle : 0.76). Nous avons essayé le modèle RandomForest Classifier. Le classifier est plus performant car il permet de calculer une classification en sortie (et pas une quantité).
 
-Dans une nouvelle branche du repo actuel (1 branche par groupe)
+Nous avons utilisé la fonction GridSearchCV pour nous aider à définir les meilleurs paramètres.
 
-### Critères de notation
-- qualité de la démarche (cohérence des choix qui ont été faits)
-- qualité du compte-rendu
-- capacité à aller chercher des informations (sur le net, sur le forum de Kaggle...etc)
-- performances au challenge
+Le résultat fut plus probant avec un score local de 0.82 et un score kaggle de 0.78.
+Pour améliorer notre score, nous avons essayé d’utiliser les autres données mais sans meilleur résultat.
+
+Après plusieurs recherches sur sklearn et n’ayant plus d’idée afin de peaufiner ce score avec ce modèle, nous avons décidé de tester un autre modèle : SVC (Support Vector Classification).
+
+Malgré plusieurs tests, le score ne s’est pas amélioré, c’est pourquoi nous avons décidé de rester sur le RandomForestClassifier.
