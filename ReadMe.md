@@ -4,7 +4,7 @@ Matthieu Brillaxis - Guilhem Canivet
 
 ### Compte rendu Exercice
 On a d'abord essayé de rajouter de la donnée avec les données "Pclass" et "Embarked" dans nos test.
-On a ensuite remplis les données null ou vide, on a remplacé les ages manquant en fonction des Pclass, et on a supprimé les Embarked manquant car il y en avait que 2.
+On a ensuite remplis les données null ou vide, on a remplacé les ages manquant en fonction des Pclass (Plus les classes étaient cher plus on mettait des âges élevés), et on a supprimé les Embarked manquant car il y en avait que 2.
 On a créer une nouvelle donnée, la taille de la famille "FamilySize", en additionant "Parch", "Sib sp" et en ajoutant 1.
 
 
