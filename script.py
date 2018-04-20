@@ -1,6 +1,6 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
-# from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 
 # chargement des donnees
@@ -34,6 +34,7 @@ train['Age'] = train[['Age', 'Pclass']].apply(age_approx, axis=1)
 # On supprime les donnees null restante comme il y en a que 2 on n'en perd pas trop
 train.dropna(inplace=True)
 
+
 # pre-processing
 train['Embarked']=pd.get_dummies(train['Embarked'],drop_first=True)
 train['Age'] = train['Age'].fillna(train['Age'].mean())
@@ -48,12 +49,9 @@ X = train[['Age', 'Sex', 'Pclass']]
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
 
 # entrainement d'une regression lineaire
-model = DecisionTreeClassifier(max_depth=3, random_state=100)
-model = model.fit(X, y)
+model = LogisticRegression()
 model.fit(X_train, y_train)
 model.score(X_test, y_test)
-
-model = model.fit(X, y)
 
 # predictions
 test['Survived'] = model.predict(test[['Age', 'Sex', 'Pclass']])
