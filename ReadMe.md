@@ -1,39 +1,21 @@
-# Titanic Challenge
-20 Avril 2018
+################
+### Rapport ####
+################
 
-### Principe
-Il s'agit d'un challenge de Machine Learning (classification binaire) dans lequel le but est de prédire si un passager du Titanic a survécu ou non au naufrage à partir de caractéristiques comme son âge ou son sexe.  
-La métrique permettant de mesurer la qualité du modèle est la précision (= pourcentage de bonnes prédictions).  
+##SCORE KAGGLE: 0.77990 - Simon Milleto
 
-Le challenge, les données ainsi qu'un descriptif détaillé sont disponibles sur la plateforme Kaggle:  
-https://www.kaggle.com/c/titanic
-	
-### Durée
-3h (de 16h à 19h)
+# Utilisation de la variable Name
+Le nom des passagers recèlent des informations importantes concernant leur classe sociale. Nous avons simplifié la vision globale des passagers en regrouppant les titres royaux dans une seul groupe ('Rare Title'), et en lassant le reste comme tel. Partant de là, nous avons fait des dummies. Il était en effet fort possible que les personnes issues des meilleurs millieux arrivaient a obtenir de meilleurs cannaux et a passer en premier, maximisant leurs chances de survie.
 
-### Objectif
-Vérifier votre capacité à:
-- mettre en place un algorithme de Machine Learning le plus performant possible
-- faire face à des problématiques data concrètes (nettoyage et traitement de la donnée, gestion des valeurs manquantes, feature engineering...etc)
+# Construction d'une nouvelle feature: Family Size.
+La taille de la famille devait problablement jouer un rôle crucial dans la survie des passagers: les plus nombreux devaient avoir plus de mal a trouver des places dans les cannaux, et ne voulaient surement pas être séparés. Les moins nombreux / personnes seules, avaient plus de chance.
 
-### Déroulé
-Un script de départ vous est remis en début de séance.
-- il met en place un algorithme simple (régression linéaire)
-- seules 2 features sont exploitées (âge et sexe)  
+Pour construire cette variable, nous nous sommes basés sur deux features du dataSet: SibSp (nombre de frères / soeurs ) et Parch (parents / enfants). Nous avons fait l'addition : SibSp + Parch + 1, pour compter la personne elle même.
 
-Charge à vous d'ajouter des features et d'utiliser des modèles plus complexes afin d'obtenir un meilleur score.
-Vous pouvez pour cela utiliser toutes les ressources à votre disposition (internet, forum Kaggle...etc).  
-Chaque groupe clone le repo et apporte au script les modifications qu'il souhaite.  
-	
-### Attendus
-- le code (commenté)
-- les prédictions qui ont été envoyées à la plateforme (dans le dossier predictions/)
-- un compte rendu détaillant ce qui a été fait et citant les ressources utilisées (à la place du ReadMe.md)
+# Utilisation de la variable Fare (prix du ticket)
+Le prix du ticket étant fortemment corrélé à la classe sociale (plus la classe est élevée, plus le ticket acheté est cher), il nous a semblé bon d'inclure cette variable dans notre modele.
+Certaines données étant manquantes, nous avons pris la décision de remplir les trous avec la valeur médiane plutôt qu'enlever les lignes.
 
-Dans une nouvelle branche du repo actuel (1 branche par groupe)
-
-### Critères de notation
-- qualité de la démarche (cohérence des choix qui ont été faits)
-- qualité du compte-rendu
-- capacité à aller chercher des informations (sur le net, sur le forum de Kaggle...etc)
-- performances au challenge
+# Selection du meilleur modèle possible
+Nous savions que les résultats étaient très différents selon les différents modèles utilisés (regression logistique, random forest classifier, random forest regressor..).
+Nous avons donc créé un petit algorythme qui calculait le score de chacun de ces modèles et selectionnait le meilleur d'entre eux.

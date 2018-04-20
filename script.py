@@ -26,6 +26,7 @@ train['Name'].replace(to_replace='(.*, )|(\\..*)', value='', inplace=True, regex
 train['Name'].replace(rare_titles, "Rare title", inplace=True)
 train['Name'].replace(["Mlle","Ms", "Mme"], ["Miss", "Miss", "Mrs"], inplace=True)
 train['Name'] = pd.get_dummies(train['Name'])
+train['Embarked'] = pd.get_dummies(train['Embarked'])
 
 
 #################### TEST
@@ -38,10 +39,11 @@ test['Name'].replace(to_replace='(.*, )|(\\..*)', value='', inplace=True, regex=
 test['Name'].replace(rare_titles, "Rare title", inplace=True)
 test['Name'].replace(["Mlle","Ms", "Mme"], ["Miss", "Miss", "Mrs"], inplace=True)
 test['Name'] = pd.get_dummies(test['Name'])
+test['Embarked'] = pd.get_dummies(test['Embarked'])
 
 
 y = train['Survived']
-X = train[['Age', 'Sex', 'Name', 'Fare', 'FamilySize']]
+X = train[['Age', 'Sex', 'Name', 'Fare', 'FamilySize', 'Embarked']]
 
 # séparation en datasets de train et de test
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
@@ -54,7 +56,9 @@ models = [
     RandomForestClassifier(n_estimators=20),
     RandomForestClassifier(max_depth=2, random_state=0, n_estimators=100),
     RandomForestClassifier(max_depth=10, n_estimators=20),
-    RandomForestClassifier(max_depth=20, n_estimators=50)
+    RandomForestClassifier(max_depth=20, n_estimators=50),
+    RandomForestClassifier(max_depth=50, n_estimators=100),
+    RandomForestClassifier(max_depth=10, n_estimators=100)
 
 ]
 
@@ -73,5 +77,5 @@ for model in models:
  
 print("best score : ", best_score)
 # predictions
-test['Survived'] = best_model.predict(test[['Age', 'Sex', 'Name', 'Fare', 'FamilySize']])
+test['Survived'] = best_model.predict(test[['Age', 'Sex', 'Name', 'Fare', 'FamilySize', 'Embarked']])
 test[['PassengerId', 'Survived']].to_csv('predictions/predictions.csv', index=False)
