@@ -41,6 +41,10 @@ Dans une nouvelle branche du repo actuel (1 branche par groupe)
 
 ## Compte rendu
 
+Kaggle:
+- Bram Van Osta
+- Clément Ollivier
+
 ### Analyse des données
 Compréhension des données en utilisant le [Data Dictionary](https://www.kaggle.com/c/titanic/data). On a essayé de définir les features qui pouvaient sembler utile, puis on a sorti les valeurs inutiles. Soit parce qu'il y avait trop de données manquantes, soit parce que les données ne semblaient pas avoir un grand intérêt dans la prédiction.
 
