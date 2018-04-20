@@ -34,6 +34,8 @@ train['Age'] = train[['Age', 'Pclass']].apply(age_approx, axis=1)
 # On supprime les donnees null restante comme il y en a que 2 on n'en perd pas trop
 train.dropna(inplace=True)
 
+for df in [train, test]:
+    df['FamilySize'] = df['Parch'] + df['SibSp'] + 1
 
 # pre-processing
 train['Embarked']=pd.get_dummies(train['Embarked'],drop_first=True)
@@ -43,7 +45,7 @@ test['Age'] = test['Age'].fillna(test['Age'].mean())
 test['Embarked']=pd.get_dummies(test['Embarked'],drop_first=True)
 test['Sex'] = pd.get_dummies(test['Sex'], drop_first=True)
 y = train['Survived']
-X = train[['Age', 'Sex', 'Pclass']]
+X = train[['Age', 'Sex', 'Pclass','FamilySize']]
 
 # separation en datasets de train et de test
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
@@ -54,7 +56,7 @@ model.fit(X_train, y_train)
 model.score(X_test, y_test)
 
 # predictions
-test['Survived'] = model.predict(test[['Age', 'Sex', 'Pclass']])
+test['Survived'] = model.predict(test[['Age', 'Sex', 'Pclass','FamilySize']])
 test[['PassengerId', 'Survived']].to_csv('predictions/predictions.csv', index=False)
 
 print(model.score(X_test, y_test))
