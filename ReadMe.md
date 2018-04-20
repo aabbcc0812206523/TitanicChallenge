@@ -1,12 +1,12 @@
-#TITANIC CHALLENGE
+# TITANIC CHALLENGE
 
 Profil sur Kaggle : rthoreau2
 
-##Approche
+## Approche
 Le but du Titanic Challenge est de prédire la survie ou non des différents passagers.
 De ce fait nous avons déjà un indice sur la direction qu’il faut prendre, le fait qu’il y ait seulement deux issues possibles (0-1) nous dirige vers un modèle de classification.
 
-##Etapes
+## Etapes
 Dans un premier temps, nous avons analysé les différentes données afin de prioriser certaines informations.
 Les premières valeurs qui semblent être importantes sont l’âge et le sexe.
 Or nous remarquons que la colonne « Age » comporte des valeurs manquantes, deux choix étaient donc possible : Supprimer la ligne (au prix d’une donnée), ou affecter une valeur en fonction des autres lignes.
